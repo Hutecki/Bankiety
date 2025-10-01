@@ -109,32 +109,72 @@ export default function DayDetailModal({
   };
 
   const color = dayColors[day];
+  
+  // Get safe CSS classes based on color
+  const getHeaderClass = (color) => {
+    const colorMap = {
+      blue: "bg-blue-100 border-blue-200",
+      green: "bg-green-100 border-green-200", 
+      purple: "bg-purple-100 border-purple-200",
+      orange: "bg-orange-100 border-orange-200",
+      red: "bg-red-100 border-red-200",
+      pink: "bg-pink-100 border-pink-200",
+      indigo: "bg-indigo-100 border-indigo-200"
+    };
+    return colorMap[color] || "bg-gray-100 border-gray-200";
+  };
+
+  const getButtonClass = (color) => {
+    const colorMap = {
+      blue: "bg-blue-500 hover:bg-blue-600",
+      green: "bg-green-500 hover:bg-green-600",
+      purple: "bg-purple-500 hover:bg-purple-600", 
+      orange: "bg-orange-500 hover:bg-orange-600",
+      red: "bg-red-500 hover:bg-red-600",
+      pink: "bg-pink-500 hover:bg-pink-600",
+      indigo: "bg-indigo-500 hover:bg-indigo-600"
+    };
+    return colorMap[color] || "bg-gray-500 hover:bg-gray-600";
+  };
+
+  const getFormBgClass = (color) => {
+    const colorMap = {
+      blue: "bg-blue-50 border-blue-200",
+      green: "bg-green-50 border-green-200",
+      purple: "bg-purple-50 border-purple-200",
+      orange: "bg-orange-50 border-orange-200", 
+      red: "bg-red-50 border-red-200",
+      pink: "bg-pink-50 border-pink-200",
+      indigo: "bg-indigo-50 border-indigo-200"
+    };
+    return colorMap[color] || "bg-gray-50 border-gray-200";
+  };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-lg w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className={`bg-${color}-100 border-b border-${color}-200 p-6`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">{dayIcons[day]}</span>
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 capitalize">
+        <div className={`${getHeaderClass(color)} border-b p-4 sm:p-6`}>
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <span className="text-2xl sm:text-3xl flex-shrink-0">{dayIcons[day]}</span>
+              <div className="min-w-0">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 capitalize truncate">
                   {day}
                 </h2>
-                <p className="text-gray-600">{currentWeek}</p>
+                <p className="text-sm sm:text-base text-gray-600 truncate">{currentWeek}</p>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setShowAddForm(true)}
-                className={`bg-${color}-500 text-white px-4 py-2 rounded-lg hover:bg-${color}-600 font-medium cursor-pointer`}
+                className={`${getButtonClass(color)} text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium cursor-pointer`}
               >
                 ➕ Dodaj firmę
               </button>
               <button
                 onClick={onClose}
-                className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 font-medium cursor-pointer"
+                className="bg-gray-500 hover:bg-gray-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium cursor-pointer"
               >
                 ✕ Zamknij
               </button>
@@ -143,17 +183,17 @@ export default function DayDetailModal({
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(95vh-140px)] sm:max-h-[calc(90vh-120px)]">
           {showAddForm && (
             <div
-              className={`bg-${color}-50 rounded-lg p-6 mb-6 border border-${color}-200`}
+              className={`${getFormBgClass(color)} rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 border`}
             >
               <h3 className="text-lg font-bold mb-4 text-gray-900">
                 Dodaj nową firmę
               </h3>
               <form
                 onSubmit={handleAddSubmit}
-                className="grid grid-cols-2 gap-4"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               >
                 <div>
                   <label className="block text-sm font-medium text-gray-900 mb-2">
@@ -245,7 +285,7 @@ export default function DayDetailModal({
                     placeholder="Dodatkowe informacje"
                   />
                 </div>
-                <div className="col-span-2 flex gap-2">
+                <div className="col-span-1 sm:col-span-2 flex flex-col sm:flex-row gap-2">
                   <button
                     type="submit"
                     className="flex-1 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 font-medium cursor-pointer"
@@ -388,7 +428,7 @@ export default function DayDetailModal({
               <p className="text-gray-600 mb-4">Brak planów na ten dzień</p>
               <button
                 onClick={() => setShowAddForm(true)}
-                className={`bg-${color}-500 text-white px-6 py-3 rounded-lg hover:bg-${color}-600 font-medium cursor-pointer`}
+                className={`${getButtonClass(color)} text-white px-4 sm:px-6 py-3 rounded-lg font-medium cursor-pointer`}
               >
                 Dodaj pierwszą firmę
               </button>
@@ -401,14 +441,14 @@ export default function DayDetailModal({
               {plans.map((plan, index) => (
                 <div
                   key={plan._id}
-                  className="bg-gray-50 rounded-lg p-6 border border-gray-200 hover:bg-gray-100 transition-colors"
+                  className="bg-gray-50 rounded-lg p-3 sm:p-6 border border-gray-200 hover:bg-gray-100 transition-colors"
                 >
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex-1">
-                      <h4 className="text-xl font-semibold text-gray-800 mb-2">
+                  <div className="flex justify-between items-start mb-3 sm:mb-4">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 truncate">
                         {plan.nazwaFirmy}
                       </h4>
-                      <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm">
                         <div className="flex items-center gap-2">
                           <span>🕐</span>
                           <span className="font-medium">
@@ -418,7 +458,7 @@ export default function DayDetailModal({
                         {plan.sala && (
                           <div className="flex items-center gap-2">
                             <span>🏢</span>
-                            <span>{plan.sala}</span>
+                            <span className="truncate">{plan.sala}</span>
                           </div>
                         )}
                         {plan.liczbaOsob && (
@@ -430,7 +470,7 @@ export default function DayDetailModal({
                         {plan.opiekun && (
                           <div className="flex items-center gap-2">
                             <span>👤</span>
-                            <span>{plan.opiekun}</span>
+                            <span className="truncate">{plan.opiekun}</span>
                           </div>
                         )}
                       </div>
@@ -450,17 +490,17 @@ export default function DayDetailModal({
                         </div>
                       )}
                     </div>
-                    <div className="flex gap-2 ml-4">
+                    <div className="flex gap-2 ml-2 sm:ml-4 flex-shrink-0">
                       <button
                         onClick={() => handleEditClick(plan)}
-                        className="text-blue-600 hover:text-blue-800 text-lg cursor-pointer"
+                        className="text-blue-600 hover:text-blue-800 text-lg sm:text-xl cursor-pointer p-1"
                         title="Edytuj"
                       >
                         ✏️
                       </button>
                       <button
                         onClick={() => onDeletePlan(plan._id)}
-                        className="text-red-600 hover:text-red-800 text-lg cursor-pointer"
+                        className="text-red-600 hover:text-red-800 text-lg sm:text-xl cursor-pointer p-1"
                         title="Usuń"
                       >
                         🗑️
