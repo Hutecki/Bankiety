@@ -363,7 +363,7 @@ export default function ProduktNaciagu() {
                         </div>
                         <div className="text-right">
                           <span className="text-lg font-bold text-red-600">
-                            -{transaction.ilosc}
+                            {transaction.ilosc}
                           </span>
                           <p className="text-xs text-gray-500">
                             {new Date(

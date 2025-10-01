@@ -331,7 +331,7 @@ export default function KategoriaAlkoholu() {
                         </div>
                         <div className="text-right">
                           <div className="text-2xl font-bold text-red-600">
-                            -{uzycie.ilosc}
+                            {uzycie.ilosc}
                           </div>
                           <div className="text-xs text-gray-500">
                             {new Date(uzycie.createdAt).toLocaleDateString()}
