@@ -182,12 +182,13 @@ export default function PlannerPage() {
                   Planer Tygodniowy
                 </h1>
                 <p className="text-sm sm:text-base text-gray-600 truncate">
-                  Harmonogram firm ({currentWeek}) - {getTotalCompaniesCount()} firm
+                  Harmonogram firm ({currentWeek}) - {getTotalCompaniesCount()}{" "}
+                  firm
                 </p>
               </div>
             </div>
           </div>
-          
+
           {/* Action Buttons - Mobile Responsive */}
           <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
             <button
@@ -224,12 +225,12 @@ export default function PlannerPage() {
                 if (!hasPlans) return "border-gray-300 bg-white";
                 const colorMap = {
                   blue: "border-blue-500 bg-blue-50",
-                  green: "border-green-500 bg-green-50", 
+                  green: "border-green-500 bg-green-50",
                   purple: "border-purple-500 bg-purple-50",
                   orange: "border-orange-500 bg-orange-50",
                   red: "border-red-500 bg-red-50",
                   pink: "border-pink-500 bg-pink-50",
-                  indigo: "border-indigo-500 bg-indigo-50"
+                  indigo: "border-indigo-500 bg-indigo-50",
                 };
                 return colorMap[color] || "border-gray-300 bg-white";
               };
@@ -238,11 +239,11 @@ export default function PlannerPage() {
                 const colorMap = {
                   blue: "text-blue-600",
                   green: "text-green-600",
-                  purple: "text-purple-600", 
+                  purple: "text-purple-600",
                   orange: "text-orange-600",
                   red: "text-red-600",
                   pink: "text-pink-600",
-                  indigo: "text-indigo-600"
+                  indigo: "text-indigo-600",
                 };
                 return colorMap[color] || "text-gray-600";
               };
@@ -252,10 +253,10 @@ export default function PlannerPage() {
                   blue: "bg-blue-100 border-blue-200",
                   green: "bg-green-100 border-green-200",
                   purple: "bg-purple-100 border-purple-200",
-                  orange: "bg-orange-100 border-orange-200", 
+                  orange: "bg-orange-100 border-orange-200",
                   red: "bg-red-100 border-red-200",
                   pink: "bg-pink-100 border-pink-200",
-                  indigo: "bg-indigo-100 border-indigo-200"
+                  indigo: "bg-indigo-100 border-indigo-200",
                 };
                 return colorMap[color] || "bg-gray-100 border-gray-200";
               };
@@ -264,16 +265,25 @@ export default function PlannerPage() {
                 <div
                   key={day}
                   onClick={() => handleDayClick(day)}
-                  className={`${getBorderClass(color, hasPlans)} rounded-lg shadow-md p-4 sm:p-6 border-l-4 min-h-[180px] sm:min-h-[200px] flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-[1.02]`}
+                  className={`${getBorderClass(
+                    color,
+                    hasPlans
+                  )} rounded-lg shadow-md p-4 sm:p-6 border-l-4 min-h-[180px] sm:min-h-[200px] flex flex-col cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-[1.02]`}
                 >
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                      <span className="text-xl sm:text-2xl flex-shrink-0">{dayIcons[day]}</span>
+                      <span className="text-xl sm:text-2xl flex-shrink-0">
+                        {dayIcons[day]}
+                      </span>
                       <h3 className="text-lg sm:text-xl font-bold text-gray-800 capitalize truncate">
                         {day}
                       </h3>
                     </div>
-                    <div className={`text-sm sm:text-lg font-bold ${getTextClass(color)} flex-shrink-0`}>
+                    <div
+                      className={`text-sm sm:text-lg font-bold ${getTextClass(
+                        color
+                      )} flex-shrink-0`}
+                    >
                       {dayPlans.length > 0
                         ? `${dayPlans.length} firm`
                         : "Pusty"}
@@ -285,7 +295,9 @@ export default function PlannerPage() {
                       {dayPlans.slice(0, 3).map((plan, index) => (
                         <div
                           key={plan._id}
-                          className={`${getPlanBgClass(color)} rounded-lg p-2 sm:p-3 border`}
+                          className={`${getPlanBgClass(
+                            color
+                          )} rounded-lg p-2 sm:p-3 border`}
                         >
                           <h4 className="font-semibold text-gray-800 text-xs sm:text-sm mb-1 truncate">
                             {plan.nazwaFirmy}
@@ -293,7 +305,9 @@ export default function PlannerPage() {
                           <div className="text-xs text-gray-600 space-y-1">
                             <div className="flex items-center gap-1">
                               <span>🕐</span>
-                              <span className="truncate">{plan.godzinyObslugi}</span>
+                              <span className="truncate">
+                                {plan.godzinyObslugi}
+                              </span>
                             </div>
                             {plan.sala && (
                               <div className="flex items-center gap-1">

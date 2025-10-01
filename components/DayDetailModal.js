@@ -109,17 +109,17 @@ export default function DayDetailModal({
   };
 
   const color = dayColors[day];
-  
+
   // Get safe CSS classes based on color
   const getHeaderClass = (color) => {
     const colorMap = {
       blue: "bg-blue-100 border-blue-200",
-      green: "bg-green-100 border-green-200", 
+      green: "bg-green-100 border-green-200",
       purple: "bg-purple-100 border-purple-200",
       orange: "bg-orange-100 border-orange-200",
       red: "bg-red-100 border-red-200",
       pink: "bg-pink-100 border-pink-200",
-      indigo: "bg-indigo-100 border-indigo-200"
+      indigo: "bg-indigo-100 border-indigo-200",
     };
     return colorMap[color] || "bg-gray-100 border-gray-200";
   };
@@ -128,11 +128,11 @@ export default function DayDetailModal({
     const colorMap = {
       blue: "bg-blue-500 hover:bg-blue-600",
       green: "bg-green-500 hover:bg-green-600",
-      purple: "bg-purple-500 hover:bg-purple-600", 
+      purple: "bg-purple-500 hover:bg-purple-600",
       orange: "bg-orange-500 hover:bg-orange-600",
       red: "bg-red-500 hover:bg-red-600",
       pink: "bg-pink-500 hover:bg-pink-600",
-      indigo: "bg-indigo-500 hover:bg-indigo-600"
+      indigo: "bg-indigo-500 hover:bg-indigo-600",
     };
     return colorMap[color] || "bg-gray-500 hover:bg-gray-600";
   };
@@ -142,10 +142,10 @@ export default function DayDetailModal({
       blue: "bg-blue-50 border-blue-200",
       green: "bg-green-50 border-green-200",
       purple: "bg-purple-50 border-purple-200",
-      orange: "bg-orange-50 border-orange-200", 
+      orange: "bg-orange-50 border-orange-200",
       red: "bg-red-50 border-red-200",
       pink: "bg-pink-50 border-pink-200",
-      indigo: "bg-indigo-50 border-indigo-200"
+      indigo: "bg-indigo-50 border-indigo-200",
     };
     return colorMap[color] || "bg-gray-50 border-gray-200";
   };
@@ -157,18 +157,24 @@ export default function DayDetailModal({
         <div className={`${getHeaderClass(color)} border-b p-4 sm:p-6`}>
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-              <span className="text-2xl sm:text-3xl flex-shrink-0">{dayIcons[day]}</span>
+              <span className="text-2xl sm:text-3xl flex-shrink-0">
+                {dayIcons[day]}
+              </span>
               <div className="min-w-0">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-800 capitalize truncate">
                   {day}
                 </h2>
-                <p className="text-sm sm:text-base text-gray-600 truncate">{currentWeek}</p>
+                <p className="text-sm sm:text-base text-gray-600 truncate">
+                  {currentWeek}
+                </p>
               </div>
             </div>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setShowAddForm(true)}
-                className={`${getButtonClass(color)} text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium cursor-pointer`}
+                className={`${getButtonClass(
+                  color
+                )} text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium cursor-pointer`}
               >
                 ➕ Dodaj firmę
               </button>
@@ -186,7 +192,9 @@ export default function DayDetailModal({
         <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(95vh-140px)] sm:max-h-[calc(90vh-120px)]">
           {showAddForm && (
             <div
-              className={`${getFormBgClass(color)} rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 border`}
+              className={`${getFormBgClass(
+                color
+              )} rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 border`}
             >
               <h3 className="text-lg font-bold mb-4 text-gray-900">
                 Dodaj nową firmę
@@ -428,7 +436,9 @@ export default function DayDetailModal({
               <p className="text-gray-600 mb-4">Brak planów na ten dzień</p>
               <button
                 onClick={() => setShowAddForm(true)}
-                className={`${getButtonClass(color)} text-white px-4 sm:px-6 py-3 rounded-lg font-medium cursor-pointer`}
+                className={`${getButtonClass(
+                  color
+                )} text-white px-4 sm:px-6 py-3 rounded-lg font-medium cursor-pointer`}
               >
                 Dodaj pierwszą firmę
               </button>
