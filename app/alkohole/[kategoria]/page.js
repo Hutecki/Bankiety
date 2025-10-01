@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import UzyjAlkoholModal from "../../../components/UzyjAlkoholModal";
 import DodajDostaweModal from "../../../components/DodajDostaweModal";
+import DodajAlkoholModal from "../../../components/DodajAlkoholModal";
 
 const categoryInfo = {
   "wino-biale": {
@@ -41,6 +42,7 @@ export default function KategoriaAlkoholu() {
   const [selectedAlkohol, setSelectedAlkohol] = useState(null);
   const [showUzyjModal, setShowUzyjModal] = useState(false);
   const [showDostawaModal, setShowDostawaModal] = useState(false);
+  const [showAddAlkoholModal, setShowAddAlkoholModal] = useState(false);
 
   const categorySlug = params.kategoria;
   const categoryData = categoryInfo[categorySlug];
@@ -153,9 +155,17 @@ export default function KategoriaAlkoholu() {
           {/* Inventory Section */}
           <div className="xl:col-span-1 lg:col-span-2">
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                📦 Stan Magazynu
-              </h2>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-800">
+                  📦 Stan Magazynu
+                </h2>
+                <button
+                  onClick={() => setShowAddAlkoholModal(true)}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer"
+                >
+                  ➕ Dodaj Alkohol
+                </button>
+              </div>
 
               {loading ? (
                 <div className="text-center py-8">
@@ -196,7 +206,7 @@ export default function KategoriaAlkoholu() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex gap-3 mb-4">
+                      <div className="flex gap-3">
                         <button
                           onClick={() => {
                             setSelectedAlkohol(alkohol);
@@ -217,49 +227,6 @@ export default function KategoriaAlkoholu() {
                           📦 Dodaj Dostawę
                         </button>
                       </div>
-
-                      {/* Stats */}
-                      <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-green-600">
-                            {alkohol.laczenaDostarczona}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            Dostarczone
-                          </div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-red-600">
-                            {alkohol.lacznaUzyta}
-                          </div>
-                          <div className="text-xs text-gray-500">Użyte</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-lg font-bold text-blue-600">
-                            {alkohol.ruchMagazynowy}
-                          </div>
-                          <div className="text-xs text-gray-500">Saldo</div>
-                        </div>
-                      </div>
-
-                      {/* Last Delivery Info */}
-                      {alkohol.ostatniadostawa?.data && (
-                        <div className="mt-3 pt-3 border-t border-gray-100">
-                          <p className="text-sm text-gray-600">
-                            <strong>Ostatnia dostawa:</strong>{" "}
-                            {new Date(
-                              alkohol.ostatniadostawa.data
-                            ).toLocaleDateString()}{" "}
-                            ({alkohol.ostatniadostawa.ilosc} szt.)
-                            {alkohol.ostatniadostawa.dostarczylKto && (
-                              <span>
-                                {" "}
-                                - {alkohol.ostatniadostawa.dostarczylKto}
-                              </span>
-                            )}
-                          </p>
-                        </div>
-                      )}
                     </div>
                   ))}
                 </div>
@@ -364,7 +331,7 @@ export default function KategoriaAlkoholu() {
                         </div>
                         <div className="text-right">
                           <div className="text-2xl font-bold text-red-600">
-                            {uzycie.ilosc}
+                            -{uzycie.ilosc}
                           </div>
                           <div className="text-xs text-gray-500">
                             {new Date(uzycie.createdAt).toLocaleDateString()}
@@ -402,6 +369,15 @@ export default function KategoriaAlkoholu() {
               setSelectedAlkohol(null);
             }}
             onUpdate={refreshData}
+          />
+        )}
+
+        {showAddAlkoholModal && (
+          <DodajAlkoholModal
+            isOpen={showAddAlkoholModal}
+            kategoria={categoryData}
+            onClose={() => setShowAddAlkoholModal(false)}
+            onSuccess={refreshData}
           />
         )}
       </div>
