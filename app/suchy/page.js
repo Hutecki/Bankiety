@@ -48,15 +48,19 @@ export default function SuchyPage() {
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Kawa */}
           <Link href="/suchy/kawa" className="group">
-            <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-amber-400 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-amber-400 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-8xl mb-6">☕</div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">Kawa</h3>
-                <p className="text-gray-600 mb-4">Kawa mielona i ziarnista</p>
+                <div className="text-6xl sm:text-8xl mb-4 sm:mb-6">☕</div>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 sm:mb-3">
+                  Kawa
+                </h3>
+                <p className="text-gray-600 mb-2 sm:mb-4">
+                  Kawa mielona i ziarnista
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-amber-600">
+                  <div className="text-xl sm:text-2xl font-bold text-amber-600">
                     {suchy
                       .filter((n) => n.podkategoria === "kawa")
                       .reduce((sum, n) => sum + n.aktualnaIlosc, 0)
@@ -70,17 +74,19 @@ export default function SuchyPage() {
 
           {/* Cukier */}
           <Link href="/suchy/cukier" className="group">
-            <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-pink-400 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-pink-400 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-8xl mb-6">🍬</div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                <div className="text-6xl sm:text-8xl mb-4 sm:mb-6">🍬</div>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 sm:mb-3">
                   Cukier
                 </h3>
-                <p className="text-gray-600 mb-4">Cukier brązowy i biały</p>
+                <p className="text-gray-600 mb-2 sm:mb-4">
+                  Cukier brązowy i biały
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-pink-600">
+                  <div className="text-xl sm:text-2xl font-bold text-pink-600">
                     {suchy
                       .filter((n) => n.podkategoria === "cukier")
                       .reduce((sum, n) => sum + n.aktualnaIlosc, 0)

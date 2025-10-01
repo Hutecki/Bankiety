@@ -48,17 +48,19 @@ export default function NaciagiPage() {
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Napoje */}
           <Link href="/naciagi/napoje" className="group">
-            <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-blue-300 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-blue-300 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-8xl mb-6">🥤</div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-3">
+                <div className="text-6xl sm:text-8xl mb-4 sm:mb-6">🥤</div>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 sm:mb-3">
                   Napoje
                 </h2>
-                <p className="text-gray-600 mb-4">Pepsi, 7up, Mirinda, Softy</p>
+                <p className="text-gray-600 mb-2 sm:mb-4">
+                  Pepsi, 7up, Mirinda, Softy
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-blue-600">
+                  <div className="text-xl sm:text-2xl font-bold text-blue-600">
                     {naciagi
                       .filter((n) => n.kategoria === "napoje")
                       .reduce((sum, n) => sum + n.aktualnaIlosc, 0)}{" "}
@@ -71,15 +73,19 @@ export default function NaciagiPage() {
 
           {/* Mleko */}
           <Link href="/naciagi/mleko" className="group">
-            <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-yellow-300 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-yellow-300 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-8xl mb-6">🥛</div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-3">Mleko</h2>
-                <p className="text-gray-600 mb-4">Mleko zwykłe, Mleko bl</p>
+                <div className="text-6xl sm:text-8xl mb-4 sm:mb-6">🥛</div>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2 sm:mb-3">
+                  Mleko
+                </h2>
+                <p className="text-gray-600 mb-2 sm:mb-4">
+                  Mleko zwykłe, Mleko bl
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-yellow-600">
+                  <div className="text-xl sm:text-2xl font-bold text-yellow-600">
                     {naciagi
                       .filter((n) => n.kategoria === "mleko")
                       .reduce((sum, n) => sum + n.aktualnaIlosc, 0)}{" "}

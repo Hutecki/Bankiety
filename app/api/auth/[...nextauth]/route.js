@@ -75,6 +75,21 @@ const authOptions = {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  url: process.env.NEXTAUTH_URL,
+  debug: process.env.NODE_ENV === "development",
+  logger: {
+    error(code, metadata) {
+      console.error("NextAuth Error:", code, metadata);
+    },
+    warn(code) {
+      console.warn("NextAuth Warning:", code);
+    },
+    debug(code, metadata) {
+      if (process.env.NODE_ENV === "development") {
+        console.log("NextAuth Debug:", code, metadata);
+      }
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

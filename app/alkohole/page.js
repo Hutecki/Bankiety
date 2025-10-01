@@ -48,17 +48,19 @@ export default function AlkoholePage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Wine Białe */}
           <Link href="/alkohole/wino-biale" className="group">
-            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-yellow-300 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-yellow-300 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-6xl mb-4">🥂</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">🥂</div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
                   Wino Białe
                 </h3>
-                <p className="text-gray-600 mb-4">Białe wina do bankietów</p>
+                <p className="text-sm sm:text-base text-gray-600 mb-2 sm:mb-4">
+                  Białe wina do bankietów
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-yellow-600">
+                  <div className="text-lg sm:text-2xl font-bold text-yellow-600">
                     {alkohole
                       .filter((a) => a.kategoria === "wino_biale")
                       .reduce((sum, a) => sum + a.aktualnaIlosc, 0)}{" "}
@@ -71,17 +73,19 @@ export default function AlkoholePage() {
 
           {/* Wine Czerwone */}
           <Link href="/alkohole/wino-czerwone" className="group">
-            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-red-300 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-red-300 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-6xl mb-4">🍷</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">🍷</div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
                   Wino Czerwone
                 </h3>
-                <p className="text-gray-600 mb-4">Czerwone wina do bankietów</p>
+                <p className="text-sm sm:text-base text-gray-600 mb-2 sm:mb-4">
+                  Czerwone wina do bankietów
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-red-600">
+                  <div className="text-lg sm:text-2xl font-bold text-red-600">
                     {alkohole
                       .filter((a) => a.kategoria === "wino_czerwone")
                       .reduce((sum, a) => sum + a.aktualnaIlosc, 0)}{" "}
@@ -94,17 +98,19 @@ export default function AlkoholePage() {
 
           {/* Whiskey */}
           <Link href="/alkohole/whiskey" className="group">
-            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-amber-400 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-amber-400 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-6xl mb-4">🥃</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">🥃</div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
                   Whiskey
                 </h3>
-                <p className="text-gray-600 mb-4">Whiskey i mocne alkohole</p>
+                <p className="text-sm sm:text-base text-gray-600 mb-2 sm:mb-4">
+                  Whiskey i mocne alkohole
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-amber-600">
+                  <div className="text-lg sm:text-2xl font-bold text-amber-600">
                     {alkohole
                       .filter((a) => a.kategoria === "whiskey")
                       .reduce((sum, a) => sum + a.aktualnaIlosc, 0)}{" "}
@@ -117,17 +123,19 @@ export default function AlkoholePage() {
 
           {/* Inne */}
           <Link href="/alkohole/inne" className="group">
-            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-purple-300 h-64 flex items-center">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-purple-300 min-h-[16rem] flex items-center">
               <div className="text-center w-full">
-                <div className="text-6xl mb-4">🍸</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">🍸</div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
                   Inne Alkohole
                 </h3>
-                <p className="text-gray-600 mb-4">Pozostałe alkohole</p>
+                <p className="text-sm sm:text-base text-gray-600 mb-2 sm:mb-4">
+                  Pozostałe alkohole
+                </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>
                 ) : (
-                  <div className="text-2xl font-bold text-purple-600">
+                  <div className="text-lg sm:text-2xl font-bold text-purple-600">
                     {alkohole
                       .filter((a) => a.kategoria === "inne")
                       .reduce((sum, a) => sum + a.aktualnaIlosc, 0)}{" "}

@@ -179,7 +179,7 @@ export default function PlannerPage() {
               <div className="text-5xl">📋</div>
               <div>
                 <h1 className="text-3xl font-bold text-gray-800">
-                  Planner Tygodniowy
+                  Planer Tygodniowy
                 </h1>
                 <p className="text-gray-600">
                   Zarządzanie harmonogramem firm ({currentWeek}) -{" "}
