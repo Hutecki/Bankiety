@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import UzyjSuchyModal from "../../../../components/UzyjSuchyModal";
 import DodajDostaweSuchyModal from "../../../../components/DodajDostaweSuchyModal";
@@ -24,7 +24,7 @@ export default function ProduktSuchy() {
     description: "Cukier biały i brunatny",
   };
 
-  const pobierzSucheProdukty = async () => {
+  const pobierzSucheProdukty = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(
@@ -39,9 +39,9 @@ export default function ProduktSuchy() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [productData.dbSubcategory]);
 
-  const pobierzTransakcje = async () => {
+  const pobierzTransakcje = useCallback(async () => {
     try {
       const response = await fetch(`/api/suchy-transakcje?limit=50`);
       if (response.ok) {
@@ -56,12 +56,12 @@ export default function ProduktSuchy() {
     } catch (error) {
       console.error("Błąd podczas pobierania transakcji:", error);
     }
-  };
+  }, [productData.dbSubcategory]);
 
   useEffect(() => {
     pobierzSucheProdukty();
     pobierzTransakcje();
-  }, []);
+  }, [pobierzSucheProdukty, pobierzTransakcje]);
 
   const refreshData = () => {
     pobierzSucheProdukty();

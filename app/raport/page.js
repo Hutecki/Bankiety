@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 export default function RaportPage() {
@@ -14,7 +14,7 @@ export default function RaportPage() {
   const [timeFilter, setTimeFilter] = useState("month");
   const [selectedCategory, setSelectedCategory] = useState("overview");
 
-  const fetchReportData = async () => {
+  const fetchReportData = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -203,11 +203,11 @@ export default function RaportPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeFilter]);
 
   useEffect(() => {
     fetchReportData();
-  }, [timeFilter]);
+  }, [timeFilter, fetchReportData]);
 
   const getTimeFilterLabel = () => {
     switch (timeFilter) {

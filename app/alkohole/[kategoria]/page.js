@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import UzyjAlkoholModal from "../../../components/UzyjAlkoholModal";
 import DodajDostaweModal from "../../../components/DodajDostaweModal";
@@ -45,6 +45,57 @@ export default function KategoriaAlkoholu() {
   const categorySlug = params.kategoria;
   const categoryData = categoryInfo[categorySlug];
 
+  // Fetch alcohol for this category
+  const pobierzAlkohole = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/alkohole");
+      if (response.ok) {
+        const data = await response.json();
+        const filteredData = data.filter(
+          (alkohol) => alkohol.kategoria === categoryData?.dbCategory
+        );
+        setAlkohole(filteredData);
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania alkoholi:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [categoryData?.dbCategory]);
+
+  // Fetch transactions for this category
+  const pobierzTransakcje = useCallback(async () => {
+    try {
+      const response = await fetch("/api/transakcje?limit=50");
+      if (response.ok) {
+        const data = await response.json();
+        // Filter transactions for alcohols in this category
+        const filteredTransactions = data.filter((t) =>
+          alkohole.some((a) => a.nazwa === t.nazwaAlkoholu)
+        );
+        setTransakcje(filteredTransactions);
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania transakcji:", error);
+    }
+  }, [alkohole]);
+
+  useEffect(() => {
+    pobierzAlkohole();
+  }, [categorySlug, pobierzAlkohole]);
+
+  useEffect(() => {
+    if (alkohole.length > 0) {
+      pobierzTransakcje();
+    }
+  }, [alkohole, pobierzTransakcje]);
+
+  const refreshData = () => {
+    pobierzAlkohole();
+    pobierzTransakcje();
+  };
+
   if (!categoryData) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -62,57 +113,6 @@ export default function KategoriaAlkoholu() {
       </div>
     );
   }
-
-  // Fetch alcohol for this category
-  const pobierzAlkohole = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/api/alkohole");
-      if (response.ok) {
-        const data = await response.json();
-        const filteredData = data.filter(
-          (alkohol) => alkohol.kategoria === categoryData.dbCategory
-        );
-        setAlkohole(filteredData);
-      }
-    } catch (error) {
-      console.error("Błąd podczas pobierania alkoholi:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch transactions for this category
-  const pobierzTransakcje = async () => {
-    try {
-      const response = await fetch("/api/transakcje?limit=50");
-      if (response.ok) {
-        const data = await response.json();
-        // Filter transactions for alcohols in this category
-        const filteredTransactions = data.filter((t) =>
-          alkohole.some((a) => a.nazwa === t.nazwaAlkoholu)
-        );
-        setTransakcje(filteredTransactions);
-      }
-    } catch (error) {
-      console.error("Błąd podczas pobierania transakcji:", error);
-    }
-  };
-
-  useEffect(() => {
-    pobierzAlkohole();
-  }, [categorySlug]);
-
-  useEffect(() => {
-    if (alkohole.length > 0) {
-      pobierzTransakcje();
-    }
-  }, [alkohole]);
-
-  const refreshData = () => {
-    pobierzAlkohole();
-    pobierzTransakcje();
-  };
 
   // Split transactions by type
   const dostawy = transakcje.filter((t) => t.typTransakcji === "dostawa");
@@ -301,7 +301,7 @@ export default function KategoriaAlkoholu() {
                           </p>
                           {dostawa.notatki && (
                             <p className="text-sm text-gray-500 mt-2 italic">
-                              "{dostawa.notatki}"
+                              &ldquo;{dostawa.notatki}&rdquo;
                             </p>
                           )}
                         </div>
@@ -358,7 +358,7 @@ export default function KategoriaAlkoholu() {
                           </p>
                           {uzycie.notatki && (
                             <p className="text-sm text-gray-500 mt-2 italic">
-                              "{uzycie.notatki}"
+                              &ldquo;{uzycie.notatki}&rdquo;
                             </p>
                           )}
                         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import UzyjNaciagiModal from "../../../../components/UzyjNaciagiModal";
 import DodajDostaweNaciagiModal from "../../../../components/DodajDostaweNaciagiModal";
@@ -38,6 +38,55 @@ export default function ProduktMleka() {
   const productSlug = params.produkt;
   const productData = productInfo[productSlug];
 
+  // Fetch naciagi for this product
+  const pobierzNaciagi = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/naciagi");
+      if (response.ok) {
+        const data = await response.json();
+        const filteredData = data.filter(
+          (naciag) => naciag.podkategoria === productData?.dbSubcategory
+        );
+        setNaciagi(filteredData);
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania naciągów:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [productData?.dbSubcategory]);
+
+  // Fetch transactions for this product
+  const pobierzTransakcje = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `/api/naciagi-transakcje?podkategoria=${productData?.dbSubcategory}&limit=50`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setTransakcje(data);
+      }
+    } catch (error) {
+      console.error("Błąd podczas pobierania transakcji:", error);
+    }
+  }, [productData?.dbSubcategory]);
+
+  useEffect(() => {
+    pobierzNaciagi();
+  }, [productSlug, pobierzNaciagi]);
+
+  useEffect(() => {
+    if (naciagi.length > 0) {
+      pobierzTransakcje();
+    }
+  }, [naciagi, pobierzTransakcje]);
+
+  const refreshData = () => {
+    pobierzNaciagi();
+    pobierzTransakcje();
+  };
+
   if (!productData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center">
@@ -55,55 +104,6 @@ export default function ProduktMleka() {
       </div>
     );
   }
-
-  // Fetch naciagi for this product
-  const pobierzNaciagi = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/api/naciagi");
-      if (response.ok) {
-        const data = await response.json();
-        const filteredData = data.filter(
-          (naciag) => naciag.podkategoria === productData.dbSubcategory
-        );
-        setNaciagi(filteredData);
-      }
-    } catch (error) {
-      console.error("Błąd podczas pobierania naciągów:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch transactions for this product
-  const pobierzTransakcje = async () => {
-    try {
-      const response = await fetch(
-        `/api/naciagi-transakcje?podkategoria=${productData.dbSubcategory}&limit=50`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setTransakcje(data);
-      }
-    } catch (error) {
-      console.error("Błąd podczas pobierania transakcji:", error);
-    }
-  };
-
-  useEffect(() => {
-    pobierzNaciagi();
-  }, [productSlug]);
-
-  useEffect(() => {
-    if (naciagi.length > 0) {
-      pobierzTransakcje();
-    }
-  }, [naciagi]);
-
-  const refreshData = () => {
-    pobierzNaciagi();
-    pobierzTransakcje();
-  };
 
   // Split transactions by type
   const dostawy = transakcje.filter((t) => t.typTransakcji === "dostawa");
