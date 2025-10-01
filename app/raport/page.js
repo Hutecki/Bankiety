@@ -258,7 +258,7 @@ export default function RaportPage() {
               <div className="flex justify-between">
                 <span className="text-gray-600">Użyte:</span>
                 <span className="font-medium text-red-600">
-                  -{product.used.toFixed(2)} {unit}
+                  {product.used.toFixed(2)} {unit}
                 </span>
               </div>
               <div className="flex justify-between">
@@ -482,7 +482,7 @@ export default function RaportPage() {
                       <div className="flex justify-between">
                         <span className="text-gray-700">Użyte:</span>
                         <span className="font-bold text-red-600">
-                          -{reportData.alkohole.used.toFixed(2)} szt
+                          {reportData.alkohole.used.toFixed(2)} szt
                         </span>
                       </div>
                       <div className="flex justify-between">
@@ -525,7 +525,7 @@ export default function RaportPage() {
                       <div className="flex justify-between">
                         <span className="text-gray-700">Użyte:</span>
                         <span className="font-bold text-red-600">
-                          -{reportData.naciagi.used.toFixed(2)} szt
+                          {reportData.naciagi.used.toFixed(2)} szt
                         </span>
                       </div>
                       <div className="flex justify-between">
@@ -568,7 +568,7 @@ export default function RaportPage() {
                       <div className="flex justify-between">
                         <span className="text-gray-700">Użyte:</span>
                         <span className="font-bold text-red-600">
-                          -{reportData.suchy.used.toFixed(2)} kg
+                          {reportData.suchy.used.toFixed(2)} kg
                         </span>
                       </div>
                       <div className="flex justify-between">
@@ -623,7 +623,6 @@ export default function RaportPage() {
                     </div>
                     <div className="text-center">
                       <div className="text-3xl font-bold text-red-600">
-                        -
                         {(
                           reportData.alkohole.used +
                           reportData.naciagi.used +
