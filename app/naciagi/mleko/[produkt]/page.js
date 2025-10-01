@@ -196,7 +196,7 @@ export default function ProduktMleka() {
                           disabled={item.aktualnaIlosc === 0}
                           className="flex-1 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed font-medium cursor-pointer"
                         >
-                          📤 Użyj Naciąg
+                          📤 Użyj Mleka
                         </button>
                         <button
                           onClick={() => {
