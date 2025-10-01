@@ -232,19 +232,23 @@ export default function RaportPage() {
         : "amber";
 
     return (
-      <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
         {products.map((product) => (
           <div
             key={product._id}
-            className={`bg-gradient-to-br from-${colorClass}-50 to-${colorClass}-100 rounded-lg p-4 border-l-4 border-${colorClass}-500`}
+            className={`bg-gradient-to-br from-${colorClass}-50 to-${colorClass}-100 rounded-lg p-3 sm:p-4 border-l-4 border-${colorClass}-500`}
           >
-            <div className="flex justify-between items-start mb-3">
-              <h4 className="font-semibold text-gray-800">{product.nazwa}</h4>
-              <span className={`text-lg font-bold text-${colorClass}-600`}>
+            <div className="flex justify-between items-start mb-2 sm:mb-3">
+              <h4 className="text-sm sm:text-base font-semibold text-gray-800 pr-2">
+                {product.nazwa}
+              </h4>
+              <span
+                className={`text-base sm:text-lg font-bold text-${colorClass}-600 flex-shrink-0`}
+              >
                 {product.aktualnaIlosc?.toFixed(2)} {unit}
               </span>
             </div>
-            <div className="space-y-2 text-sm">
+            <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Dostarczone:</span>
                 <span className="font-medium text-green-600">
@@ -286,8 +290,8 @@ export default function RaportPage() {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
+        <div className="mb-6">
+          <div className="flex items-center gap-3 mb-4">
             <button
               onClick={() => router.push("/")}
               className="text-gray-600 hover:text-gray-800 text-2xl cursor-pointer"
@@ -295,16 +299,20 @@ export default function RaportPage() {
               ←
             </button>
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">📊 Raport</h1>
-              <p className="text-gray-600">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+                📊 Raport
+              </h1>
+              <p className="text-sm sm:text-base text-gray-600">
                 Szczegółowa analiza magazynu i aktywności
               </p>
             </div>
           </div>
-          <div className="flex gap-2">
+
+          {/* Time Filter Buttons - Mobile Responsive */}
+          <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
             <button
               onClick={() => setTimeFilter("week")}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
+              className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-colors cursor-pointer ${
                 timeFilter === "week"
                   ? "bg-purple-500 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -314,7 +322,7 @@ export default function RaportPage() {
             </button>
             <button
               onClick={() => setTimeFilter("month")}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
+              className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-colors cursor-pointer ${
                 timeFilter === "month"
                   ? "bg-purple-500 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -324,7 +332,7 @@ export default function RaportPage() {
             </button>
             <button
               onClick={() => setTimeFilter("all")}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer ${
+              className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-colors cursor-pointer ${
                 timeFilter === "all"
                   ? "bg-purple-500 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -334,7 +342,7 @@ export default function RaportPage() {
             </button>
             <button
               onClick={fetchReportData}
-              className="ml-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer"
+              className="bg-gray-500 hover:bg-gray-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-colors cursor-pointer"
             >
               🔄 Odśwież
             </button>
@@ -342,55 +350,102 @@ export default function RaportPage() {
         </div>
 
         {/* Time Filter Info */}
-        <div className="text-center mb-8">
-          <p className="text-lg font-medium text-gray-700">
+        <div className="text-center mb-6">
+          <p className="text-base sm:text-lg font-medium text-gray-700">
             {getTimeFilterLabel()}
           </p>
         </div>
 
-        {/* Category Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white rounded-lg shadow-md p-2 flex gap-2">
-            <button
-              onClick={() => setSelectedCategory("overview")}
-              className={`px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
-                selectedCategory === "overview"
-                  ? "bg-purple-500 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              📊 Przegląd
-            </button>
-            <button
-              onClick={() => setSelectedCategory("alkohole")}
-              className={`px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
-                selectedCategory === "alkohole"
-                  ? "bg-blue-500 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              🍷 Alkohole
-            </button>
-            <button
-              onClick={() => setSelectedCategory("naciagi")}
-              className={`px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
-                selectedCategory === "naciagi"
-                  ? "bg-green-500 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              🥤 Naciągi
-            </button>
-            <button
-              onClick={() => setSelectedCategory("suchy")}
-              className={`px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
-                selectedCategory === "suchy"
-                  ? "bg-amber-500 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
-            >
-              ☕ Suchy
-            </button>
+        {/* Category Navigation - Mobile Responsive */}
+        <div className="mb-8">
+          <div className="bg-white rounded-lg shadow-md p-2">
+            {/* Mobile: 2x2 Grid */}
+            <div className="grid grid-cols-2 sm:hidden gap-2">
+              <button
+                onClick={() => setSelectedCategory("overview")}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "overview"
+                    ? "bg-purple-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                📊 Przegląd
+              </button>
+              <button
+                onClick={() => setSelectedCategory("alkohole")}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "alkohole"
+                    ? "bg-blue-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                🍷 Alkohole
+              </button>
+              <button
+                onClick={() => setSelectedCategory("naciagi")}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "naciagi"
+                    ? "bg-green-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                🥤 Naciągi
+              </button>
+              <button
+                onClick={() => setSelectedCategory("suchy")}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "suchy"
+                    ? "bg-amber-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                ☕ Suchy
+              </button>
+            </div>
+
+            {/* Desktop: Horizontal Layout */}
+            <div className="hidden sm:flex gap-2">
+              <button
+                onClick={() => setSelectedCategory("overview")}
+                className={`px-4 lg:px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "overview"
+                    ? "bg-purple-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                📊 Przegląd
+              </button>
+              <button
+                onClick={() => setSelectedCategory("alkohole")}
+                className={`px-4 lg:px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "alkohole"
+                    ? "bg-blue-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                🍷 Alkohole
+              </button>
+              <button
+                onClick={() => setSelectedCategory("naciagi")}
+                className={`px-4 lg:px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "naciagi"
+                    ? "bg-green-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                🥤 Naciągi
+              </button>
+              <button
+                onClick={() => setSelectedCategory("suchy")}
+                className={`px-4 lg:px-6 py-3 rounded-lg font-medium transition-colors cursor-pointer ${
+                  selectedCategory === "suchy"
+                    ? "bg-amber-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                ☕ Suchy
+              </button>
+            </div>
           </div>
         </div>
 
@@ -407,13 +462,13 @@ export default function RaportPage() {
             {selectedCategory === "overview" && (
               <div>
                 {/* Summary Cards */}
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border-l-4 border-blue-500">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 border-l-4 border-blue-500">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-bold text-gray-800">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800">
                         🍷 Alkohole
                       </h3>
-                      <span className="text-2xl font-bold text-blue-600">
+                      <span className="text-xl sm:text-2xl font-bold text-blue-600">
                         {reportData.alkohole.count}
                       </span>
                     </div>
@@ -451,12 +506,12 @@ export default function RaportPage() {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 border-l-4 border-green-500">
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 sm:p-6 border-l-4 border-green-500">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-bold text-gray-800">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800">
                         🥤 Naciągi
                       </h3>
-                      <span className="text-2xl font-bold text-green-600">
+                      <span className="text-xl sm:text-2xl font-bold text-green-600">
                         {reportData.naciagi.count}
                       </span>
                     </div>
@@ -494,12 +549,12 @@ export default function RaportPage() {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg p-6 border-l-4 border-amber-500">
+                  <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg p-4 sm:p-6 border-l-4 border-amber-500">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-bold text-gray-800">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800">
                         ☕ Suchy
                       </h3>
-                      <span className="text-2xl font-bold text-amber-600">
+                      <span className="text-xl sm:text-2xl font-bold text-amber-600">
                         {reportData.suchy.count}
                       </span>
                     </div>
@@ -538,11 +593,11 @@ export default function RaportPage() {
                 </div>
 
                 {/* Overall Summary Stats */}
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+                <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">
                     📈 Podsumowanie Ogólne
                   </h3>
-                  <div className="grid md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-gray-800">
                         {reportData.alkohole.count +
