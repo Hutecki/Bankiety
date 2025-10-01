@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import TransactionCleanup from "../../components/TransactionCleanup";
+import ZeroQuantities from "../../components/ZeroQuantities";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -108,6 +109,9 @@ export default function AdminPage() {
         <div className="grid lg:grid-cols-1 gap-6">
           {/* Transaction Cleanup Section */}
           <TransactionCleanup />
+
+          {/* Zero Quantities Section */}
+          <ZeroQuantities />
 
           {/* Additional Admin Features can be added here */}
           <div className="bg-white rounded-lg shadow-md p-6">
