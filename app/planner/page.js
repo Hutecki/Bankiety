@@ -66,7 +66,7 @@ export default function PlannerPage() {
   const handleCleanupAll = async () => {
     if (
       !confirm(
-        "Czy na pewno chcesz usunąć WSZYSTKIE plany? Ta operacja jest nieodwracalna!"
+        "Czy na pewno chcesz usunąć WSZYSTKIE plany z bazy danych? Ta operacja jest nieodwracalna i usunie wszystkie zapisane firmy ze wszystkich dni!"
       )
     ) {
       return;
@@ -76,7 +76,7 @@ export default function PlannerPage() {
       const response = await fetch("/api/weekly-plan?cleanup=all");
       if (response.ok) {
         await fetchPlans();
-        alert("Wszystkie plany zostały usunięte");
+        alert("Wszystkie plany zostały usunięte z bazy danych");
       }
     } catch (error) {
       console.error("Błąd podczas czyszczenia bazy:", error);
@@ -179,11 +179,10 @@ export default function PlannerPage() {
               <div className="text-3xl sm:text-5xl flex-shrink-0">📋</div>
               <div className="min-w-0">
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 truncate">
-                  Planer Tygodniowy
+                  Planer Bankietowy
                 </h1>
                 <p className="text-sm sm:text-base text-gray-600 truncate">
-                  Harmonogram firm ({currentWeek}) - {getTotalCompaniesCount()}{" "}
-                  firm
+                  Harmonogram wszystkich firm - {getTotalCompaniesCount()} firm
                 </p>
               </div>
             </div>
@@ -201,9 +200,9 @@ export default function PlannerPage() {
             <button
               onClick={handleCleanupAll}
               className="bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-medium transition-colors cursor-pointer"
-              title="Usuń wszystkie plany (przydatne przy planowaniu nowego tygodnia)"
+              title="Usuń wszystkie plany z bazy danych"
             >
-              🗑️ Wyczyść
+              🗑️ Usuń Wszystko
             </button>
           </div>
         </div>
@@ -348,6 +347,9 @@ export default function PlannerPage() {
         {/* Instructions */}
         <div className="mt-8 text-center text-gray-500 text-sm">
           <p>💡 Kliknij na dzień aby zarządzać firmami i szczegółami planów</p>
+          <p className="mt-2">
+            ℹ️ Plany pozostają w systemie do momentu ręcznego usunięcia
+          </p>
         </div>
       </div>
 

@@ -7,7 +7,6 @@ export async function GET(request) {
     await connectDB();
 
     const { searchParams } = new URL(request.url);
-    const week = searchParams.get("week") || WeeklyPlan.getCurrentWeek();
     const cleanup = searchParams.get("cleanup");
 
     // Handle cleanup operations
@@ -21,13 +20,13 @@ export async function GET(request) {
       return NextResponse.json({ message: "Wszystkie dane zostały usunięte" });
     }
 
-    // Get plans for specific week
-    const plans = await WeeklyPlan.find({ rokTydzien: week }).sort({
-      dzienTygodnia: 1,
+    // Get all plans (no week filtering)
+    const plans = await WeeklyPlan.find({}).sort({
+      dataUtworzenia: -1, // Show newest first
     });
 
     return NextResponse.json({
-      currentWeek: week,
+      currentWeek: WeeklyPlan.getCurrentWeek(), // Keep for compatibility
       plans: plans,
     });
   } catch (error) {
@@ -60,9 +59,6 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-
-    // Auto-cleanup old weeks when adding new data
-    await WeeklyPlan.cleanupOldWeeks();
 
     const currentWeek = WeeklyPlan.getCurrentWeek();
 
