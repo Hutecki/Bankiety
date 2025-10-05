@@ -16,7 +16,15 @@ const naciagiSchema = new mongoose.Schema(
     podkategoria: {
       type: String,
       required: true,
-      enum: ["pepsi", "7up", "mirinda", "mleko_zwykle", "mleko_bl"],
+      enum: [
+        "pepsi",
+        "7up",
+        "mirinda",
+        "softy",
+        "paliwka",
+        "mleko_zwykle",
+        "mleko_bl",
+      ],
       trim: true,
     },
     aktualnaIlosc: {

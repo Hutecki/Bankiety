@@ -302,7 +302,7 @@ export default function PlannerPage() {
                           <h4 className="font-semibold text-gray-800 text-xs sm:text-sm mb-1 truncate">
                             {plan.nazwaFirmy}
                           </h4>
-                          <div className="text-xs text-gray-600 space-y-1">
+                          <div className="text-xs text-gray-800 space-y-1">
                             <div className="flex items-center gap-1">
                               <span>🕐</span>
                               <span className="truncate">
@@ -325,14 +325,14 @@ export default function PlannerPage() {
                         </div>
                       ))}
                       {dayPlans.length > 3 && (
-                        <div className="text-center text-xs sm:text-sm text-gray-500 font-medium">
+                        <div className="text-center text-xs sm:text-sm text-gray-700 font-medium">
                           +{dayPlans.length - 3} więcej...
                         </div>
                       )}
                     </div>
                   ) : (
                     <div className="flex-1 flex items-center justify-center">
-                      <div className="text-center text-gray-400">
+                      <div className="text-center text-gray-600">
                         <div className="text-3xl sm:text-4xl mb-2">📅</div>
                         <p className="text-xs sm:text-sm">Brak planów</p>
                         <p className="text-xs mt-1">Kliknij aby dodać</p>

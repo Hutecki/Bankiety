@@ -458,29 +458,35 @@ export default function DayDetailModal({
                       <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 truncate">
                         {plan.nazwaFirmy}
                       </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm text-gray-800">
                         <div className="flex items-center gap-2">
                           <span>🕐</span>
-                          <span className="font-medium">
+                          <span className="font-medium text-gray-800">
                             {plan.godzinyObslugi}
                           </span>
                         </div>
                         {plan.sala && (
                           <div className="flex items-center gap-2">
                             <span>🏢</span>
-                            <span className="truncate">{plan.sala}</span>
+                            <span className="truncate text-gray-800">
+                              {plan.sala}
+                            </span>
                           </div>
                         )}
                         {plan.liczbaOsob && (
                           <div className="flex items-center gap-2">
                             <span>👥</span>
-                            <span>{plan.liczbaOsob} osób</span>
+                            <span className="text-gray-800">
+                              {plan.liczbaOsob} osób
+                            </span>
                           </div>
                         )}
                         {plan.opiekun && (
                           <div className="flex items-center gap-2">
                             <span>👤</span>
-                            <span className="truncate">{plan.opiekun}</span>
+                            <span className="truncate text-gray-800">
+                              {plan.opiekun}
+                            </span>
                           </div>
                         )}
                       </div>
@@ -489,10 +495,10 @@ export default function DayDetailModal({
                           <div className="flex items-start gap-2">
                             <span>💡</span>
                             <div>
-                              <p className="font-medium text-sm text-gray-700">
+                              <p className="font-medium text-sm text-gray-800">
                                 Uwagi:
                               </p>
-                              <p className="text-sm text-gray-600">
+                              <p className="text-sm text-gray-800">
                                 {plan.uwagi}
                               </p>
                             </div>

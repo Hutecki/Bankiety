@@ -8,10 +8,12 @@ export default function ZeroQuantities() {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const handleZeroQuantities = async () => {
-    if (!window.confirm(
-      "⚠️ UWAGA! Ta operacja wyzeruje wszystkie ilości produktów w magazynie.\n\n" +
-      "Czy na pewno chcesz kontynuować? Ta akcja jest nieodwracalna!"
-    )) {
+    if (
+      !window.confirm(
+        "⚠️ UWAGA! Ta operacja wyzeruje wszystkie ilości produktów w magazynie.\n\n" +
+          "Czy na pewno chcesz kontynuować? Ta akcja jest nieodwracalna!"
+      )
+    ) {
       return;
     }
 
@@ -19,7 +21,7 @@ export default function ZeroQuantities() {
     const confirmText = prompt(
       "Aby potwierdzić, wpisz: ZERO\n\n(Wielkość liter ma znaczenie)"
     );
-    
+
     if (confirmText !== "ZERO") {
       alert("Operacja anulowana - nieprawidłowe potwierdzenie");
       return;
@@ -91,7 +93,9 @@ export default function ZeroQuantities() {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-gray-800">🔄 Zerowanie Ilości</h2>
+        <h2 className="text-2xl font-bold text-gray-800">
+          🔄 Zerowanie Ilości
+        </h2>
         <div className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
           ⚠️ Operacja nieodwracalna
         </div>
@@ -99,10 +103,13 @@ export default function ZeroQuantities() {
 
       <div className="mb-6">
         <p className="text-gray-600 mb-4">
-          Ta funkcja pozwala wyzerować pole <code className="bg-gray-100 px-2 py-1 rounded text-sm">aktualnaIlosc</code> 
+          Ta funkcja pozwala wyzerować pole{" "}
+          <code className="bg-gray-100 px-2 py-1 rounded text-sm">
+            aktualnaIlosc
+          </code>
           dla wszystkich produktów w bazie danych.
         </p>
-        
+
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
           <div className="flex items-start">
             <div className="flex-shrink-0">⚠️</div>
@@ -150,9 +157,7 @@ export default function ZeroQuantities() {
               Zerowanie...
             </>
           ) : (
-            <>
-              🔄 Wyzeruj ilości - {getCategoryLabel(selectedCategory)}
-            </>
+            <>🔄 Wyzeruj ilości - {getCategoryLabel(selectedCategory)}</>
           )}
         </button>
       </div>
@@ -205,7 +210,7 @@ export default function ZeroQuantities() {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="bg-white p-2 rounded border">
                         <div className="font-medium">🥤 Naciągi</div>
                         <div>
@@ -220,7 +225,7 @@ export default function ZeroQuantities() {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="bg-white p-2 rounded border">
                         <div className="font-medium">☕ Suchy</div>
                         <div>
@@ -236,11 +241,12 @@ export default function ZeroQuantities() {
                         </div>
                       </div>
                     </div>
-                    
+
                     {result.totalUpdated > 0 && (
                       <div className="mt-3 p-2 bg-blue-50 rounded border border-blue-200">
                         <div className="text-blue-800 font-medium">
-                          📊 Łącznie zaktualizowano: {result.totalUpdated} produktów
+                          📊 Łącznie zaktualizowano: {result.totalUpdated}{" "}
+                          produktów
                         </div>
                       </div>
                     )}
@@ -256,9 +262,16 @@ export default function ZeroQuantities() {
       <div className="mt-6 text-sm text-gray-500">
         <h4 className="font-medium text-gray-700 mb-2">Alternatywne użycie:</h4>
         <div className="bg-gray-50 p-3 rounded border font-mono text-xs">
-          <div>Script: <code>node scripts/zero-quantities.mjs</code></div>
-          <div>Dry run: <code>node scripts/zero-quantities.mjs --dry-run</code></div>
-          <div>Specific: <code>node scripts/zero-quantities.mjs --category=alcohol</code></div>
+          <div>
+            Script: <code>node scripts/zero-quantities.mjs</code>
+          </div>
+          <div>
+            Dry run: <code>node scripts/zero-quantities.mjs --dry-run</code>
+          </div>
+          <div>
+            Specific:{" "}
+            <code>node scripts/zero-quantities.mjs --category=alcohol</code>
+          </div>
         </div>
       </div>
     </div>

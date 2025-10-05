@@ -55,7 +55,7 @@ export default function NaciagiPage() {
                   Napoje
                 </h2>
                 <p className="text-gray-600 mb-2 sm:mb-4">
-                  Pepsi, 7up, Mirinda, Softy
+                  Pepsi, 7up, Mirinda, Softy, Paliwka
                 </p>
                 {loading ? (
                   <div className="text-gray-500">Ładowanie...</div>

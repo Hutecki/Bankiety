@@ -45,7 +45,7 @@ export default function NapojePage() {
         </div>
 
         {/* Product Selection */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {/* Pepsi */}
           <Link href="/naciagi/napoje/pepsi" className="group">
             <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-blue-500 h-64 flex items-center">
@@ -125,6 +125,29 @@ export default function NapojePage() {
                   <div className="text-2xl font-bold text-purple-600">
                     {naciagi
                       .filter((n) => n.podkategoria === "softy")
+                      .reduce((sum, n) => sum + n.aktualnaIlosc, 0)}{" "}
+                    szt
+                  </div>
+                )}
+              </div>
+            </div>
+          </Link>
+
+          {/* Paliwka */}
+          <Link href="/naciagi/napoje/paliwka" className="group">
+            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent group-hover:border-amber-400 h-64 flex items-center">
+              <div className="text-center w-full">
+                <div className="text-6xl mb-4">🍺</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  Paliwka
+                </h3>
+                <p className="text-gray-600 mb-4">Napoje alkoholowe</p>
+                {loading ? (
+                  <div className="text-gray-500">Ładowanie...</div>
+                ) : (
+                  <div className="text-2xl font-bold text-amber-600">
+                    {naciagi
+                      .filter((n) => n.podkategoria === "paliwka")
                       .reduce((sum, n) => sum + n.aktualnaIlosc, 0)}{" "}
                     szt
                   </div>

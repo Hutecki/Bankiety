@@ -63,8 +63,10 @@ export async function POST(request) {
     const validKategorie = ["napoje", "mleko"];
     const validPodkategorie = [
       "pepsi",
-      "sprite",
+      "7up",
       "mirinda",
+      "softy",
+      "paliwka",
       "mleko_zwykle",
       "mleko_bl",
     ];

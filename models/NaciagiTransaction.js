@@ -50,7 +50,15 @@ const naciagiTransactionSchema = new mongoose.Schema(
     podkategoria: {
       type: String,
       required: true,
-      enum: ["pepsi", "sprite", "mirinda", "mleko_zwykle", "mleko_bl"],
+      enum: [
+        "pepsi",
+        "7up",
+        "mirinda",
+        "softy",
+        "paliwka",
+        "mleko_zwykle",
+        "mleko_bl",
+      ],
     },
   },
   {
